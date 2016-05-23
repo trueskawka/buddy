@@ -29,9 +29,13 @@
            - tcl8.6-dev
            - tk8.6-dev
            - python-tk
+    - stat: path=/usr/local/bin/pip
+      register: pip_installed
+
     - name: Install pip
       become: yes
       easy_install: name=pip state=latest
+      when: pip_installed.stat.exists == False
 
     - name: Install latest core python libraries via pip
       become: yes
