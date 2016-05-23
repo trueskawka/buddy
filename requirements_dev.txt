@@ -1,0 +1,4 @@
+ipython
+django-extensions
+flake8
+isort

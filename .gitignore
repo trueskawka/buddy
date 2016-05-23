@@ -1,0 +1,16 @@
+# ansible, vagrant
+/setup.retry
+/.vagrant
+
+# Django
+/db.sqlite3
+# dist file is a template to start your own settings
+# cp local_settings.py.dist local_settings.py
+/local_settings.py
+
+# Python
+__pycache__
+*.pyc
+
+# PyCharm
+/.idea

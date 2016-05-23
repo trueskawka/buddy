@@ -1,0 +1,43 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      become: yes
+      apt: update_cache=yes
+
+    - name: Update all packages to the latest version
+      become: yes
+      apt: upgrade=dist
+
+    - name: Install apt dependencies
+      become: yes
+      apt: name={{item}} state=installed
+      with_items:
+           - tree
+           - silversearcher-ag
+           - python-imaging
+           # -
+    - name: Install pip
+      become: yes
+      easy_install: name=pip state=latest
+
+    - name: Install latest core python libraries via pip
+      become: yes
+      pip: name={{item}} state=latest
+      with_items:
+        - setuptools
+        - virtualenv
+
+    - name: Manually create the initial virtualenv
+      command: virtualenv /home/vagrant/venv -p python3.4 creates="/home/vagrant/venv"
+
+    - name: Install pip production dependencies
+      pip:
+        requirements=~/workspace/buddy/requirements.txt
+        virtualenv=/home/vagrant/venv
+
+    - name: Install pip development dependencies
+      pip:
+        requirements=~/workspace/buddy/requirements_dev.txt
+        virtualenv=/home/vagrant/venv
