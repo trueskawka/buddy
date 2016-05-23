@@ -14,10 +14,21 @@
       become: yes
       apt: name={{item}} state=installed
       with_items:
+           - libpython3.4-dev
+           # not strictly necessary for the project as it runs on 3.4
+           - libpython2.7-dev
            - tree
            - silversearcher-ag
            - python-imaging
-           # -
+           - libtiff5-dev
+           - libjpeg8-dev
+           - zlib1g-dev
+           - libfreetype6-dev
+           - liblcms2-dev
+           - libwebp-dev
+           - tcl8.6-dev
+           - tk8.6-dev
+           - python-tk
     - name: Install pip
       become: yes
       easy_install: name=pip state=latest
