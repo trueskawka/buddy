@@ -25,7 +25,6 @@ Vagrant.configure(2) do |config|
   SCRIPT
 
   config.vm.provision "ansible_local" do |ansible|
-      ansible.verbose        = true
       ansible.install        = true
       ansible.playbook       = "setup.yml"
   end
