@@ -1,9 +1,27 @@
-from django.views.generic import ListView
-
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 from .models import Project
+from .forms import ProjectForm
 
 
 class ProjectListView(ListView):
     model = Project
-    slug_field = "name"
-    slug_url_kwarg = "name"
+
+class ProjectDetailView(DetailView):
+    model = Project
+
+class ProjectCreateView(CreateView):
+    model = Project
+    form_class = ProjectForm
+    def get_success_url(self):
+        return reverse_lazy('projects:detail', args=(self.object.slug,)) 
+
+class ProjectUpdateView(UpdateView):
+    model = Project
+    form_class = ProjectForm
+    def get_success_url(self):
+        return reverse_lazy('projects:detail', args=(self.object.slug,)) 
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    success_url = reverse_lazy('projects:list')
