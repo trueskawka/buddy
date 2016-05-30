@@ -14,6 +14,8 @@
       become: yes
       apt: name={{item}} state=installed
       with_items:
+           # easy_install which will be sued to install pip
+           - python-setuptools
            - libpython3.4-dev
            # not strictly necessary for the project as it runs on 3.4
            - libpython2.7-dev

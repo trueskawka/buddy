@@ -14,18 +14,7 @@ Vagrant.configure(2) do |config|
     vb.memory = "1024"
   end
 
-  # hack to go around https://github.com/mitchellh/vagrant/issues/6793
-  config.vm.provision :shell, inline: <<-SCRIPT
-    GALAXY=/usr/local/bin/ansible-galaxy
-    echo '#!/usr/bin/env bash
-    /usr/bin/ansible-galaxy "$@"
-    exit 0
-    ' | sudo tee $GALAXY
-    sudo chmod 0755 $GALAXY
-  SCRIPT
-
-  config.vm.provision "ansible_local" do |ansible|
-      ansible.install        = true
+  config.vm.provision "ansible" do |ansible|
       ansible.playbook       = "setup.yml"
   end
 end
