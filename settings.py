@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -126,3 +127,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'METHOD': 'oauth',
     },
 }
+
+LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_URL = 'account_login'
